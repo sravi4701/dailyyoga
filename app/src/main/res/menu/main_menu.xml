@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/main_calendar"
+        android:title="Calendar"/>
+    <item android:id="@+id/main_video_btn"
+        android:title="Yoga Videos"/>
+    <item android:id="@+id/main_setting_btn"
+        android:title="Setting"/>
+    <item android:id="@+id/main_alarm_btn"
+        android:title="Set Alarm"/>
+    <item android:id="@+id/main_camp_btn"
+        android:title="Yoga Camp"/>
+    <item android:id="@+id/main_share_btn"
+        android:title="Share"/>
+</menu>

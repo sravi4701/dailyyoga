@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ravi.yogafitness.Setting">
+
+    <include layout="@layout/app_bar_layout" android:id="@+id/setting_action_bar" />
+
+    <TextView
+        android:id="@+id/setting_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/setting_action_bar"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="26dp"
+        android:text="Choose Level"
+        android:textColor="@color/colorPrimary"
+        android:textColorLink="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:id="@+id/setting_radio_grp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="15dp"
+        android:weightSum="3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setting_level">
+        <RadioButton
+            android:id="@+id/radio_beginner"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:theme="@style/MyRadioGroup"
+            android:text="Beginner"/>
+        <RadioButton
+            android:id="@+id/radio_intermedite"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:theme="@style/MyRadioGroup"
+            android:text="Intermediate"/>
+        <RadioButton
+            android:id="@+id/radio_advance"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:theme="@style/MyRadioGroup"
+            android:text="Advance"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/setting_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setting_radio_grp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
+        android:text="Save"
+        android:textColor="@android:color/white" />
+</RelativeLayout>
