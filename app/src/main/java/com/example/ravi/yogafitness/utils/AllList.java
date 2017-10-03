@@ -14,6 +14,14 @@ public class AllList {
     private List<Exercise> beginnerList = new ArrayList<>();
     private List<Exercise> intermediateList = new ArrayList<>();
     private List<Exercise> advanceList = new ArrayList<>();
+    private List<Exercise> allList = new ArrayList<>();
+
+    public List<Exercise> getAllList() {
+        allList.addAll(getBeginnerList());
+        allList.addAll(getIntermediateList());
+        allList.addAll(getAdvanceList());
+        return allList;
+    }
 
     public List<Exercise> getBeginnerList() {
         setBeginnerList();
@@ -30,30 +38,30 @@ public class AllList {
         beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
                 "Chair Pose",
                 "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
-        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
-                "Chair Pose",
-                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
+//        beginnerList.add(new Exercise(R.drawable.chair_pose_thumbnail,
+//                "Chair Pose",
+//                "Improves posture and balance&Tones abdomen and thighs$Great for athletes and runners"));
     }
 
     public List<Exercise> getIntermediateList() {

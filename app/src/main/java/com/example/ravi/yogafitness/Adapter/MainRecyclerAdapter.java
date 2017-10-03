@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ravi.yogafitness.AllExercise;
 import com.example.ravi.yogafitness.Interface.MainItemClickListener;
 import com.example.ravi.yogafitness.MainActivity;
 import com.example.ravi.yogafitness.Model.MainPageModel;
@@ -75,6 +76,10 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerViewHo
                 if(position == 0){
                     Intent trainingIntent = new Intent(context, Training.class);
                     context.startActivity(trainingIntent);
+                }
+                else if(position == 1){
+                    Intent allExerciseIntent = new Intent(context, AllExercise.class);
+                    context.startActivity(allExerciseIntent);
                 }
                 Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT).show();
             }

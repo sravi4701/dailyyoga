@@ -20,7 +20,12 @@
         <activity
             android:name=".Setting"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".DailyTraining"></activity>
+        <activity android:name=".DailyTraining" />
+        <activity
+            android:name=".Calendars"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".AllExercise" />
+        <activity android:name=".Detail"></activity>
     </application>
 
 </manifest>

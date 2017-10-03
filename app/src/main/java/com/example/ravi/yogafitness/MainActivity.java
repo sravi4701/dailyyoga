@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if(item.getItemId() == R.id.main_calendar){
-
+            Intent calendarIntent = new Intent(MainActivity.this, Calendars.class);
+            startActivity(calendarIntent);
         }
         else if (item.getItemId() == R.id.main_video_btn){
             Toast.makeText(this, "Video Clicked", Toast.LENGTH_SHORT).show();

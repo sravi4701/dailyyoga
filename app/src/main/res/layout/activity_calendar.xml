@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ravi.yogafitness.Calendars">
+
+    <include layout="@layout/app_bar_layout" android:id="@+id/calendar_action_bar"
+        />
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendar"
+        android:layout_margin="5dp"
+        android:layout_below="@id/calendar_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="#00F"
+        app:mcv_arrowColor="@color/colorPrimary"
+        />
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/calendar"
+        android:weightSum="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@color/pink"/>
+        <TextView
+            android:text="Workout done"
+            android:textSize="20sp"
+            android:layout_marginLeft="8dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="8"
+            android:textColor="@color/colorAccent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

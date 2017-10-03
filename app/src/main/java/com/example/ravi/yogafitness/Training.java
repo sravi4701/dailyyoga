@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.example.ravi.yogafitness.Adapter.TrainingListAdapter;
 import com.example.ravi.yogafitness.Model.Exercise;
+import com.example.ravi.yogafitness.database.YogaDB;
 import com.example.ravi.yogafitness.utils.AllList;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Training extends AppCompatActivity {
     private TrainingListAdapter trainingListAdapter;
     private List<Exercise> trainingList;
     private Button mGobtn;
+    private YogaDB yogaDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +36,9 @@ public class Training extends AppCompatActivity {
         getSupportActionBar().setTitle("Daily Training");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        trainingList = new AllList().getBeginnerList();
-
+        yogaDB = new YogaDB(this);
+        int mode = yogaDB.getSettingMode();
+        initList(mode);
         trainingRecyclerView = (RecyclerView)findViewById(R.id.training_recyclerview);
         trainingListAdapter = new TrainingListAdapter(this, trainingList);
         mLayoutManager = new LinearLayoutManager(this);
@@ -51,5 +54,17 @@ public class Training extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void initList(int mode) {
+        if(mode == 0){
+            trainingList = new AllList().getBeginnerList();
+        }
+        else if(mode == 1){
+            trainingList = new AllList().getIntermediateList();
+        }
+        else if(mode == 2){
+            trainingList = new AllList().getAdvanceList();
+        }
     }
 }
