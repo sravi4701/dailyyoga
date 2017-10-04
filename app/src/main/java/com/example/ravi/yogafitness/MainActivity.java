@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(settingIntent);
         }
         else if(item.getItemId() == R.id.main_alarm_btn){
-            Toast.makeText(this, "Alarm Clicked", Toast.LENGTH_SHORT).show();
+            Intent alarmIntent = new Intent(MainActivity.this, Alarm.class);
+            startActivity(alarmIntent);
         }
         else if (item.getItemId() == R.id.main_camp_btn){
             Toast.makeText(this, "Yoga Camp Clicked", Toast.LENGTH_SHORT).show();

@@ -20,12 +20,14 @@
         <activity
             android:name=".Setting"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".DailyTraining" />
+        <activity android:name=".DailyTraining" android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Calendars"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".AllExercise" />
-        <activity android:name=".Detail"></activity>
+        <activity android:name=".AllExercise" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Detail" />
+        <activity android:name=".Alarm" android:parentActivityName=".MainActivity"></activity>
+        <receiver android:name=".AlarmNotificationReceiver" />
     </application>
 
 </manifest>
