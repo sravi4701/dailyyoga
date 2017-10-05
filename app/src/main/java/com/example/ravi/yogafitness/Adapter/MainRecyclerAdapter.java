@@ -17,6 +17,7 @@ import com.example.ravi.yogafitness.MainActivity;
 import com.example.ravi.yogafitness.Model.MainPageModel;
 import com.example.ravi.yogafitness.R;
 import com.example.ravi.yogafitness.Training;
+import com.example.ravi.yogafitness.YogaVideo;
 
 import java.util.List;
 import java.util.zip.Inflater;
@@ -80,6 +81,10 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerViewHo
                 else if(position == 1){
                     Intent allExerciseIntent = new Intent(context, AllExercise.class);
                     context.startActivity(allExerciseIntent);
+                }
+                else if(position == 2){
+                    Intent videoIntent = new Intent(context, YogaVideo.class);
+                    context.startActivity(videoIntent);
                 }
                 Toast.makeText(context, "Item Clicked", Toast.LENGTH_SHORT).show();
             }

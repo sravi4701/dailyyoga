@@ -31,15 +31,25 @@
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
-    <TimePicker
-        android:id="@+id/alarm_time_picker"
+    <TextView
+        android:id="@+id/alarm_text"
+        android:visibility="invisible"
+        android:text="Alarm is set for 20:10"
         android:layout_below="@id/relativelayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TimePicker
+        android:visibility="invisible"
+        android:id="@+id/alarm_time_picker"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/alarm_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     </TimePicker>
 
     <Button
         android:id="@+id/alarm_savebtn"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/alarm_time_picker"

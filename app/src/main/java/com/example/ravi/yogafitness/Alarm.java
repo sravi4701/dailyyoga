@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class Alarm extends AppCompatActivity {
     private Switch mAlarmSwitch;
     private TimePicker mTimePicker;
     private Button mSaveBtn;
+    private TextView mAlarmText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +36,13 @@ public class Alarm extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Set Alarm");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mTimePicker = (TimePicker)findViewById(R.id.alarm_time_picker);
 
         mAlarmSwitch = (Switch)findViewById(R.id.alarm_switch);
 
         mSaveBtn = (Button)findViewById(R.id.alarm_savebtn);
+
+        mAlarmText = (TextView)findViewById(R.id.alarm_text);
 
         mAlarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -58,6 +61,7 @@ public class Alarm extends AppCompatActivity {
                 else{
                     mTimePicker.setVisibility(View.INVISIBLE);
                     saveAlarm(false);
+                    mAlarmText.setVisibility(View.INVISIBLE);
                 }
             }
         });

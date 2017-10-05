@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(calendarIntent);
         }
         else if (item.getItemId() == R.id.main_video_btn){
-            Toast.makeText(this, "Video Clicked", Toast.LENGTH_SHORT).show();
+            Intent videoIntent = new Intent(MainActivity.this, YogaVideo.class);
+            startActivity(videoIntent);
         }
         else if (item.getItemId() == R.id.main_setting_btn){
             Intent settingIntent = new Intent(MainActivity.this, Setting.class);
@@ -71,12 +72,6 @@ public class MainActivity extends AppCompatActivity {
         else if(item.getItemId() == R.id.main_alarm_btn){
             Intent alarmIntent = new Intent(MainActivity.this, Alarm.class);
             startActivity(alarmIntent);
-        }
-        else if (item.getItemId() == R.id.main_camp_btn){
-            Toast.makeText(this, "Yoga Camp Clicked", Toast.LENGTH_SHORT).show();
-        }
-        else if(item.getItemId() == R.id.main_share_btn){
-            Toast.makeText(this, "Share Clicked", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

@@ -11,8 +11,4 @@
         android:title="Setting"/>
     <item android:id="@+id/main_alarm_btn"
         android:title="Set Alarm"/>
-    <item android:id="@+id/main_camp_btn"
-        android:title="Yoga Camp"/>
-    <item android:id="@+id/main_share_btn"
-        android:title="Share"/>
 </menu>
