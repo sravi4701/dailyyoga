@@ -1,7 +1,9 @@
 package com.example.ravi.yogafitness.Custom;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.text.style.StyleSpan;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
@@ -29,6 +31,7 @@ public class WorkoutDoneDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
+        view.addSpan(new StyleSpan(Typeface.BOLD));
         view.setBackgroundDrawable(colorDrawable);
     }
 }

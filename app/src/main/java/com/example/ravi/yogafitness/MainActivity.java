@@ -1,6 +1,8 @@
 package com.example.ravi.yogafitness;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,9 @@ import android.widget.Toast;
 
 import com.example.ravi.yogafitness.Adapter.MainRecyclerAdapter;
 import com.example.ravi.yogafitness.Model.MainPageModel;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mainRecyclerView;
     private LinearLayoutManager mainLayoutManager;
     private MainRecyclerAdapter mainRecyclerAdapter;
+
+    //ads
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
         mToolbar = (Toolbar)findViewById(R.id.main_action_bar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Yoga Fitness");
+
+        // Ads
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView) findViewById(R.id.mainadView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         initData();
         mainRecyclerView = (RecyclerView)findViewById(R.id.main_recycler_view);
@@ -45,6 +60,30 @@ public class MainActivity extends AppCompatActivity {
         mainList.add(new MainPageModel(R.drawable.dailyyogaimage, "Start Daily Training"));
         mainList.add(new MainPageModel(R.drawable.allyoga, "All Yoga Poses"));
         mainList.add(new MainPageModel(R.drawable.yogavideos, "Yoga Videos"));
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Are you sure want to exit this app ?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override

@@ -13,6 +13,9 @@ import com.example.ravi.yogafitness.Adapter.TrainingListAdapter;
 import com.example.ravi.yogafitness.Model.Exercise;
 import com.example.ravi.yogafitness.database.YogaDB;
 import com.example.ravi.yogafitness.utils.AllList;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class Training extends AppCompatActivity {
     private List<Exercise> trainingList;
     private Button mGobtn;
     private YogaDB yogaDB;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,12 @@ public class Training extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Daily Training");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Ads
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView) findViewById(R.id.trainingadView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         yogaDB = new YogaDB(this);
         int mode = yogaDB.getSettingMode();

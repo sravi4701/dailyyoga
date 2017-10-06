@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import com.example.ravi.yogafitness.Adapter.AllExerciseAdapter;
 import com.example.ravi.yogafitness.Model.Exercise;
 import com.example.ravi.yogafitness.utils.AllList;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class AllExercise extends AppCompatActivity {
     private AllExerciseAdapter mAllExerciseAdapter;
     private LinearLayoutManager layoutManager;
     private List<Exercise> allList;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,12 @@ public class AllExercise extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Yoga Asanas");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Ads
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView) findViewById(R.id.allexerciseadView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         allList = new AllList().getAllList();
         mAllExerciseRecyclerview = (RecyclerView)findViewById(R.id.all_exercise_recycler_view);

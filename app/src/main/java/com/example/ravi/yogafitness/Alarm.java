@@ -19,6 +19,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.ravi.yogafitness.database.YogaDB;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.sql.Time;
 import java.util.Date;
 
@@ -28,6 +33,8 @@ public class Alarm extends AppCompatActivity {
     private TimePicker mTimePicker;
     private Button mSaveBtn;
     private TextView mAlarmText;
+    private YogaDB yogaDB;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,13 @@ public class Alarm extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Set Alarm");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Ads
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView) findViewById(R.id.alarmadView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         mTimePicker = (TimePicker)findViewById(R.id.alarm_time_picker);
 
         mAlarmSwitch = (Switch)findViewById(R.id.alarm_switch);
@@ -44,25 +58,57 @@ public class Alarm extends AppCompatActivity {
 
         mAlarmText = (TextView)findViewById(R.id.alarm_text);
 
+        yogaDB = new YogaDB(this);
+        int alarm = yogaDB.getAlarm();
+        if(alarm == 0){
+            mAlarmSwitch.setChecked(false);
+            mSaveBtn.setVisibility(View.INVISIBLE);
+            mAlarmText.setVisibility(View.INVISIBLE);
+            mTimePicker.setVisibility(View.INVISIBLE);
+        }
+        else{
+            mAlarmSwitch.setChecked(true);
+            mSaveBtn.setVisibility(View.VISIBLE);
+            mAlarmText.setVisibility(View.VISIBLE);
+            mTimePicker.setVisibility(View.VISIBLE);
+            if(yogaDB.getAlarmHour() != 1){
+                mAlarmText.setText("The alarm is set for " + yogaDB.getAlarmHour() + ":" + yogaDB.getAlarmMinute());
+            }
+            else{
+                mAlarmText.setText("");
+            }
+        }
+
         mAlarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
                     mTimePicker.setVisibility(View.VISIBLE);
-                    mSaveBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            saveAlarm(true);
-                            Toast.makeText(Alarm.this, "Alarmed Saved for " + mTimePicker.getCurrentHour() + "" +
-                                    mTimePicker.getCurrentMinute(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    mSaveBtn.setVisibility(View.VISIBLE);
+                    mAlarmText.setVisibility(View.VISIBLE);
                 }
                 else{
                     mTimePicker.setVisibility(View.INVISIBLE);
+                    yogaDB.saveAlarm(0);
+                    yogaDB.saveAlarmHour(-1);
+                    yogaDB.saveAlarmMinute(-1);
                     saveAlarm(false);
-                    mAlarmText.setVisibility(View.INVISIBLE);
+                    mAlarmText.setText("");
+                    mSaveBtn.setVisibility(View.INVISIBLE);
                 }
+            }
+        });
+
+        mSaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveAlarm(true);
+                mAlarmText.setText("The alarm is set for " + mTimePicker.getCurrentHour() + ":" +mTimePicker.getCurrentMinute());
+                yogaDB.saveAlarm(1);
+                yogaDB.saveAlarmHour(mTimePicker.getCurrentHour());
+                yogaDB.saveAlarmMinute(mTimePicker.getCurrentMinute());
+                Toast.makeText(Alarm.this, "Alarmed Saved for " + mTimePicker.getCurrentHour() + "" +
+                        mTimePicker.getCurrentMinute(), Toast.LENGTH_SHORT).show();
             }
         });
     }

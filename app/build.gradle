@@ -32,5 +32,6 @@ dependencies {
     compile 'me.zhanghai.android.materialprogressbar:library:1.4.1'
     compile 'com.prolificinteractive:material-calendarview:1.4.3'
     compile files('libs/YoutubeAndroidPlayerApi.jar')
+    compile 'com.google.android.gms:play-services-ads:11.2.0'
     testCompile 'junit:junit:4.12'
 }

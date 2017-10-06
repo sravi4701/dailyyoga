@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.example.ravi.yogafitness.Adapter.VideoAdapter;
 import com.example.ravi.yogafitness.Model.Video;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +25,7 @@ public class YogaVideo extends AppCompatActivity {
     private RecyclerView mVideoRecyclerview;
     private LinearLayoutManager layoutManager;
     private VideoAdapter videoAdapter;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,13 @@ public class YogaVideo extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Yoga Videos");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Ads
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView) findViewById(R.id.videoadView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         if(isNetworkAvailable()){
             mVideoRecyclerview = (RecyclerView)findViewById(R.id.video_recycler);
             mVideoRecyclerview.setHasFixedSize(true);

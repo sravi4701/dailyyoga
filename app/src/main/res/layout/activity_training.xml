@@ -50,11 +50,22 @@
         android:layout_above="@+id/training_gobtn">
     </android.support.v7.widget.RecyclerView>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/trainingadView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
+
     <Button
         android:id="@+id/training_gobtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/trainingadView"
         android:background="@color/colorAccent"
         android:text="Go >"
         android:textColor="@android:color/white" />

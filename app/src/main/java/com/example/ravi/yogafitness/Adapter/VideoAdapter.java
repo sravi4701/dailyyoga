@@ -26,7 +26,10 @@ import java.util.List;
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoInfoHolder> {
 
     //these ids are the unique id for each video
-    String[] VideoID = {"QWB6nRcxyTc", "cnKZit6VB44", "aM9M0zQFWe0", "dHSgZL_dSPk", "ADnOY7F9xWE"};
+    String[] VideoID = {"QWB6nRcxyTc", "aM9M0zQFWe0","dHSgZL_dSPk", "qhxTDaBLQ9U", "JYg0Vu6-RUk", "U7A85L09KLo", "NuKdq7nlZ5g",
+            "pb52NXOzWSU","d8uDl0_T5QI", "wqSwDuHDuAE", "1qoXfSvYFy4", "hJbRpHZr_d0", "30-SzcbCXhY", "TF_nvGmsbsg", "c2Af9PGAiF8",
+            "0o0kNeOyH98", "VkBxPdqczzo"
+                        };
     Context ctx;
 
     public VideoAdapter(Context context) {

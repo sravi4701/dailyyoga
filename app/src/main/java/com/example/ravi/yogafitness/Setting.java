@@ -1,6 +1,7 @@
 package com.example.ravi.yogafitness;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -13,14 +14,18 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.ravi.yogafitness.database.YogaDB;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class Setting extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private RadioGroup mRadiogroup;
     private RadioButton mRadioBeginner, mRadioIntermediate, mRadioAdvance;
-    private Button mSavebtn;
+    private Button mSavebtn, mFeedback;
     private YogaDB yogaDB;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,12 @@ public class Setting extends AppCompatActivity {
         getSupportActionBar().setTitle("Setting");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Ads
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mAdView = (AdView) findViewById(R.id.settingadView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         yogaDB = new YogaDB(this);
 
         mRadiogroup = (RadioGroup)findViewById(R.id.setting_radio_grp);
@@ -37,6 +48,13 @@ public class Setting extends AppCompatActivity {
         mRadioIntermediate = (RadioButton)findViewById(R.id.radio_intermedite);
         mRadioAdvance = (RadioButton)findViewById(R.id.radio_advance);
         mSavebtn = (Button)findViewById(R.id.setting_save);
+        mFeedback = (Button)findViewById(R.id.setting_feedbackbtn);
+        mFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendFeedBack();
+            }
+        });
         int mode = yogaDB.getSettingMode();
         setRadio(mode);
         mSavebtn.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +65,15 @@ public class Setting extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void sendFeedBack() {
+        final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/html");
+        intent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{ getString(R.string.mail_feedback_email) });
+        intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.mail_feedback_subject));
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, getString(R.string.mail_feedback_message));
+        startActivity(Intent.createChooser(intent, getString(R.string.title_send_feedback)));
     }
 
     private void setRadio(int mode) {

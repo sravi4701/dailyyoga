@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">yogafitness</string>
-</resources>
+    <string name="mail_feedback_email">sravi4701@gmail.com</string>
+    <string name="mail_feedback_subject">Yoga Fitness Feedback</string>
+    <string name="mail_feedback_message"></string>
+    <string name="title_send_feedback">Send feedback</string>
+
+    </resources>
