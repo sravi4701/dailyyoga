@@ -2,11 +2,13 @@ package com.example.ravi.yogafitness;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -42,6 +44,9 @@ public class DailyTraining extends AppCompatActivity {
     int mode;
     private AdView mAdView;
     private InterstitialAd mInterstitialAd;
+    private MediaPlayer mpStart, mpStop;
+    MyCount counter;
+    Long s1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class DailyTraining extends AppCompatActivity {
         mToolbar = (Toolbar)findViewById(R.id.daily_action_bar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Daily Yoga");
+
+        mpStart = MediaPlayer.create(this, R.raw.startsound);
+        mpStop = MediaPlayer.create(this, R.raw.stopsound);
 
         // Ads
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
@@ -82,20 +90,16 @@ public class DailyTraining extends AppCompatActivity {
             public void onClick(View v) {
                 if(mStartBtn.getText().toString().toLowerCase().equals("start")){
                     showGetReady();
-                    mStartBtn.setText("done");
+                    mStartBtn.setText("pause");
                 }
-                else if(mStartBtn.getText().toString().toLowerCase().equals("done")){
-                    exerciseCountdown.cancel();
-                    restTimeCountDown.cancel();
-                    if(ex_id < exerciseList.size()-1){
-                        showRestTime();
-                        ex_id ++;
-                        mProgressBar.setProgress(ex_id);
-                        mCountdowntxt.setText("");
-                    }
-                    else{
-                        showFinished();
-                    }
+                else if(mStartBtn.getText().toString().toLowerCase().equals("pause")){
+                    counter.cancel();
+                    mStartBtn.setText("resume");
+                }
+                else if(mStartBtn.getText().toString().toLowerCase().equals("resume")){
+                    counter = new MyCount(s1, 1000);
+                    counter.start();
+                    mStartBtn.setText("pause");
                 }
                 else if(mStartBtn.getText().toString().toLowerCase().equals("next")){
                     Intent calendarIntent = new Intent(DailyTraining.this, Calendars.class);
@@ -103,8 +107,7 @@ public class DailyTraining extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    exerciseCountdown.cancel();
-                    restTimeCountDown.cancel();
+                    counter.cancel();
                     if(ex_id < exerciseList.size()){
                         setExerciseInfo();
                     }
@@ -140,16 +143,6 @@ public class DailyTraining extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void showRestTime() {
-        mExerciseImage.setVisibility(View.INVISIBLE);
-        mCountdowntxt.setVisibility(View.INVISIBLE);
-        mStartBtn.setText("skip");
-        mStartBtn.setVisibility(View.VISIBLE);
-        mGetreadyLayout.setVisibility(View.VISIBLE);
-        restTimeCountDown.start();
-        mGetready.setText("TAKE REST");
-    }
-
     private void showGetReady() {
         mGetreadyLayout.setVisibility(View.VISIBLE);
         mExerciseImage.setVisibility(View.INVISIBLE);
@@ -167,6 +160,7 @@ public class DailyTraining extends AppCompatActivity {
             @Override
             public void onFinish() {
                 showExercise();
+                mpStart.start();
             }
         }.start();
     }
@@ -178,8 +172,8 @@ public class DailyTraining extends AppCompatActivity {
             mCountdowntxt.setVisibility(View.VISIBLE);
             mExerciseName.setVisibility(View.VISIBLE);
             mStartBtn.setVisibility(View.VISIBLE);
-            exerciseCountdown.start();
-
+            counter = new MyCount(10000, 1000);
+            counter.start();
             mExerciseName.setText(exerciseList.get(ex_id).getName());
             mExerciseImage.setImageResource(exerciseList.get(ex_id).getImageId());
         }
@@ -188,39 +182,34 @@ public class DailyTraining extends AppCompatActivity {
         }
     }
     //countdown
-    CountDownTimer exerciseCountdown = new CountDownTimer((mode*5 + 10)*1000, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            mCountdowntxt.setText("" + millisUntilFinished/1000);
+    public class MyCount extends CountDownTimer
+    {
+        public MyCount(long millisInFuture, long countDownInterval)
+        {
+            super(millisInFuture, countDownInterval);
         }
-
         @Override
-        public void onFinish() {
+        public void onFinish()
+        {
             if(ex_id < exerciseList.size()-1){
                 ex_id ++;
                 mProgressBar.setProgress(ex_id);
                 mCountdowntxt.setText("");
                 setExerciseInfo();
-                mStartBtn.setText("start");
+                showGetReady();
+                mpStop.start();
             }
             else{
                 showFinished();
             }
         }
-    };
-
-    CountDownTimer restTimeCountDown = new CountDownTimer(10000, 1000) {
         @Override
-        public void onTick(long millisUntilFinished) {
-            mBreakCountdown.setText("" + millisUntilFinished/1000);
+        public void onTick(long millisUntilFinished)
+        {
+            s1=millisUntilFinished;
+            mCountdowntxt.setText("" + millisUntilFinished/1000);
         }
-
-        @Override
-        public void onFinish() {
-            setExerciseInfo();
-            showExercise();
-        }
-    };
+    }
 
 
     private void showFinished() {
@@ -230,13 +219,10 @@ public class DailyTraining extends AppCompatActivity {
         mProgressBar.setVisibility(View.INVISIBLE);
         mExerciseName.setVisibility(View.INVISIBLE);
         mGetreadyLayout.setVisibility(View.VISIBLE);
-
-        restTimeCountDown.cancel();
         mGetready.setText("FINISHED !!!");
         mBreakCountdown.setText("Congratulations ! You completed today's task");
         mBreakCountdown.setTextSize(20);
         mStartBtn.setText("next");
-
         // Save today's exercise in databases;
         yogaDB.saveDay("" + Calendar.getInstance().getTimeInMillis());
 
@@ -252,7 +238,6 @@ public class DailyTraining extends AppCompatActivity {
         mExerciseImage.setVisibility(View.VISIBLE);
         mCountdowntxt.setVisibility(View.VISIBLE);
         mExerciseName.setVisibility(View.VISIBLE);
-        mStartBtn.setText("start");
     }
 
     private void initList(int mode) {

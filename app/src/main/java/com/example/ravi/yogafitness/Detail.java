@@ -34,7 +34,7 @@ public class Detail extends AppCompatActivity {
 
         mToolbar = (Toolbar)findViewById(R.id.detail_action_bar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Exercise Name");
+        getSupportActionBar().setTitle(allList.get(ex_id).getName());
 
         // Ads
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");

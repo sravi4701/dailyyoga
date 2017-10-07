@@ -34,7 +34,7 @@
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
                 android:scaleType="center"
-                android:src="@drawable/ic_youtubeplaybtn"/>
+                android:src="@drawable/playimage"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

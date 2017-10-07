@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.ravi.yogafitness.Adapter.MainRecyclerAdapter;
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager mainLayoutManager;
     private MainRecyclerAdapter mainRecyclerAdapter;
 
+    private CardView mDailyTraining, mAllPoses, mAllVideos;
+
     //ads
     private AdView mAdView;
 
@@ -48,12 +52,41 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        initData();
-        mainRecyclerView = (RecyclerView)findViewById(R.id.main_recycler_view);
-        mainLayoutManager = new LinearLayoutManager(this);
-        mainRecyclerAdapter = new MainRecyclerAdapter(mainList, getBaseContext());
-        mainRecyclerView.setLayoutManager(mainLayoutManager);
-        mainRecyclerView.setAdapter(mainRecyclerAdapter);
+        mDailyTraining = (CardView)findViewById(R.id.main_daily_training);
+        mAllPoses = (CardView)findViewById(R.id.main_all_poses);
+        mAllVideos = (CardView)findViewById(R.id.main_all_video);
+
+        mDailyTraining.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent trainingIntent = new Intent(MainActivity.this, Training.class);
+                startActivity(trainingIntent);
+            }
+        });
+
+
+        mAllPoses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent allExerciseIntent = new Intent(MainActivity.this, AllExercise.class);
+                startActivity(allExerciseIntent);
+            }
+        });
+
+        mAllVideos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent videoIntent = new Intent(MainActivity.this, YogaVideo.class);
+                startActivity(videoIntent);
+            }
+        });
+        //initData();
+        //mainRecyclerView = (RecyclerView)findViewById(R.id.main_recycler_view);
+        //mainRecyclerView.setHasFixedSize(true);
+        //mainLayoutManager = new LinearLayoutManager(this);
+        //mainRecyclerAdapter = new MainRecyclerAdapter(mainList, getBaseContext());
+        //mainRecyclerView.setLayoutManager(mainLayoutManager);
+        //mainRecyclerView.setAdapter(mainRecyclerAdapter);
     }
 
     private void initData() {
