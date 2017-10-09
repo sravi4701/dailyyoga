@@ -36,7 +36,7 @@ public class DailyTraining extends AppCompatActivity {
     private MaterialProgressBar mProgressBar;
     private ImageView mExerciseImage;
     private Button mStartBtn;
-    private TextView mGetready, mBreakCountdown;
+    private TextView mGetready, mBreakCountdown, mNextText;
     private TextView mCountdowntxt;
     int ex_id = 0;
     private YogaDB yogaDB;
@@ -77,6 +77,7 @@ public class DailyTraining extends AppCompatActivity {
         mCountdowntxt = (TextView)findViewById(R.id.daily_training_timer);
         mGetreadyLayout = (LinearLayout)findViewById(R.id.layout_get_ready);
         mStartBtn = (Button)findViewById(R.id.daily_training_startbtn);
+        mNextText = (TextView)findViewById(R.id.daily_next_txt);
 
         yogaDB = new YogaDB(this);
         mode = yogaDB.getSettingMode();
@@ -120,6 +121,13 @@ public class DailyTraining extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+        return;
+    }
+
+    @Override
     public void onBackPressed() {
 //        super.onBackPressed();
         final AlertDialog.Builder builder = new AlertDialog.Builder(DailyTraining.this);
@@ -128,30 +136,30 @@ public class DailyTraining extends AppCompatActivity {
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                showExercise(1);
                 finish();
             }
         });
-
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 
     private void showGetReady() {
         mGetreadyLayout.setVisibility(View.VISIBLE);
-        mExerciseImage.setVisibility(View.INVISIBLE);
+        mNextText.setVisibility(View.VISIBLE);
+        mExerciseImage.setVisibility(View.VISIBLE);
         mCountdowntxt.setVisibility(View.INVISIBLE);
         mExerciseName.setVisibility(View.INVISIBLE);
         mStartBtn.setVisibility(View.INVISIBLE);
-        mGetready.setText("GET READY");
+        mGetready.setText("GET READY IN");
 
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 mBreakCountdown.setText("" + millisUntilFinished/1000);
@@ -159,26 +167,38 @@ public class DailyTraining extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                showExercise();
+                showExercise(0);
                 mpStart.start();
             }
         }.start();
     }
 
-    private void showExercise() {
-        if(ex_id < exerciseList.size()){
-            mGetreadyLayout.setVisibility(View.INVISIBLE);
-            mExerciseImage.setVisibility(View.VISIBLE);
-            mCountdowntxt.setVisibility(View.VISIBLE);
-            mExerciseName.setVisibility(View.VISIBLE);
-            mStartBtn.setVisibility(View.VISIBLE);
-            counter = new MyCount(10000, 1000);
-            counter.start();
-            mExerciseName.setText(exerciseList.get(ex_id).getName());
-            mExerciseImage.setImageResource(exerciseList.get(ex_id).getImageId());
+    private void showExercise(int x) {
+        if(x == 1){
+            try{
+                counter.cancel();
+            }
+            catch (Exception e){
+
+            }
+            Log.d("showExercise", "true");
         }
-        else{
-            showFinished();
+        else {
+            if(ex_id < exerciseList.size()){
+                mGetreadyLayout.setVisibility(View.INVISIBLE);
+                mNextText.setVisibility(View.INVISIBLE);
+                mExerciseImage.setVisibility(View.VISIBLE);
+                mCountdowntxt.setVisibility(View.VISIBLE);
+                mExerciseName.setVisibility(View.VISIBLE);
+                mStartBtn.setVisibility(View.VISIBLE);
+                counter = new MyCount(30000, 1000);
+                counter.start();
+                mExerciseName.setText(exerciseList.get(ex_id).getName());
+                mExerciseImage.setImageResource(exerciseList.get(ex_id).getImageId());
+            }
+            else{
+                showFinished();
+            }
         }
     }
     //countdown
@@ -210,7 +230,6 @@ public class DailyTraining extends AppCompatActivity {
             mCountdowntxt.setText("" + millisUntilFinished/1000);
         }
     }
-
 
     private void showFinished() {
         mExerciseImage.setVisibility(View.INVISIBLE);

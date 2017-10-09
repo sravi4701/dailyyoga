@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = (Toolbar)findViewById(R.id.main_action_bar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Yoga Fitness");
+        getSupportActionBar().setTitle("10 Minute Yoga");
 
         // Ads
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
