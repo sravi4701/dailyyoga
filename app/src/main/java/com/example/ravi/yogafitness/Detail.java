@@ -32,6 +32,8 @@ public class Detail extends AppCompatActivity {
         Intent i = getIntent();
         int ex_id = i.getIntExtra("ex_id", 0);
 
+        allList = new AllList().getAllList();
+
         mToolbar = (Toolbar)findViewById(R.id.detail_action_bar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(allList.get(ex_id).getName());
@@ -49,8 +51,6 @@ public class Detail extends AppCompatActivity {
         mDetailImage = (ImageView)findViewById(R.id.detail_image);
         mDetailName = (TextView) findViewById(R.id.detail_name);
         mDetailDescription = (TextView)findViewById(R.id.detail_description);
-
-        allList = new AllList().getAllList();
 
         Exercise single = allList.get(ex_id);
         mDetailImage.setImageResource(single.getImageId());

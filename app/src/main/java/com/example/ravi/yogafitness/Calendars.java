@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.example.ravi.yogafitness.Custom.CurrentDayDecorator;
 import com.example.ravi.yogafitness.Custom.WorkoutDoneDecorator;
 import com.example.ravi.yogafitness.database.YogaDB;
 import com.google.android.gms.ads.AdRequest;
@@ -46,6 +47,7 @@ public class Calendars extends AppCompatActivity {
         for (String value : workoutDay){
             convertedList.add(CalendarDay.from(new Date(Long.parseLong(value))));
         }
+        materialCalendarView.addDecorator(new CurrentDayDecorator());
         materialCalendarView.addDecorator(new WorkoutDoneDecorator(convertedList));
     }
 }
