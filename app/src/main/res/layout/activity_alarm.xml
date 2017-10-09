@@ -12,7 +12,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context="com.example.ravi.yogafitness.Alarm">
+            tools:context="com.minuteyoga.justgeeks.yogafitness.Alarm">
 
             <include layout="@layout/app_bar_layout" android:id="@+id/alarm_action_bar"/>
 

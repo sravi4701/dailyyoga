@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ravi.yogafitness.AllExercise">
+    tools:context="com.minuteyoga.justgeeks.yogafitness.AllExercise">
 
     <include layout="@layout/app_bar_layout" android:id="@+id/all_exercise_action_bar"/>
 
