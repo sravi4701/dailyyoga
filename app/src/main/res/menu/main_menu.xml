@@ -11,4 +11,6 @@
         android:title="Setting"/>
     <item android:id="@+id/main_alarm_btn"
         android:title="Set Alarm"/>
+    <item android:title="Share" android:id="@+id/main_share_btn"/>
+    <item android:id="@+id/main_rate_btn" android:title="Rate us"/>
 </menu>

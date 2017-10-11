@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.minuteyoga.justgeeks.yogafitness">
+    package="ravi.minuteyogas.justgeek.yogafitnes">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,9 +13,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name="ravi.minuteyogas.justgeek.yogafitnes.MainActivity"></activity>
 
-        <activity android:name=".HomeActivity">
+        <activity android:name="ravi.minuteyogas.justgeek.yogafitnes.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,30 +23,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Training"
-            android:parentActivityName=".MainActivity" />
+            android:name="ravi.minuteyogas.justgeek.yogafitnes.Training"
+            android:parentActivityName="ravi.minuteyogas.justgeek.yogafitnes.MainActivity" />
         <activity
-            android:name=".Setting"
-            android:parentActivityName=".MainActivity" />
+            android:name="ravi.minuteyogas.justgeek.yogafitnes.Setting"
+            android:parentActivityName="ravi.minuteyogas.justgeek.yogafitnes.MainActivity" />
         <activity
-            android:name=".DailyTraining"
-            android:parentActivityName=".MainActivity" />
+            android:name="ravi.minuteyogas.justgeek.yogafitnes.DailyTraining"
+            android:parentActivityName="ravi.minuteyogas.justgeek.yogafitnes.MainActivity" />
         <activity
-            android:name=".Calendars"
-            android:parentActivityName=".MainActivity" />
+            android:name="ravi.minuteyogas.justgeek.yogafitnes.Calendars"
+            android:parentActivityName="ravi.minuteyogas.justgeek.yogafitnes.MainActivity" />
         <activity
-            android:name=".AllExercise"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".Detail" />
+            android:name="ravi.minuteyogas.justgeek.yogafitnes.AllExercise"
+            android:parentActivityName="ravi.minuteyogas.justgeek.yogafitnes.MainActivity" />
+        <activity android:name="ravi.minuteyogas.justgeek.yogafitnes.Detail" />
         <activity
-            android:name=".Alarm"
-            android:parentActivityName=".MainActivity" />
+            android:name="ravi.minuteyogas.justgeek.yogafitnes.Alarm"
+            android:parentActivityName="ravi.minuteyogas.justgeek.yogafitnes.MainActivity" />
 
-        <receiver android:name=".AlarmNotificationReceiver" />
+        <receiver android:name="ravi.minuteyogas.justgeek.yogafitnes.AlarmNotificationReceiver" />
 
         <activity
-            android:name=".YogaVideo"
-            android:parentActivityName=".MainActivity" />
+            android:name="ravi.minuteyogas.justgeek.yogafitnes.YogaVideo"
+            android:parentActivityName="ravi.minuteyogas.justgeek.yogafitnes.MainActivity" />
 
     </application>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.minuteyoga.justgeeks.yogafitness.DailyTraining">
+    tools:context="ravi.minuteyogas.justgeek.yogafitnes.DailyTraining">
 
     <include layout="@layout/app_bar_layout" android:id="@+id/daily_action_bar" />
 
@@ -87,8 +87,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-8199311615587112/2348031907">
     </com.google.android.gms.ads.AdView>
 
     <Button
@@ -110,4 +110,14 @@
         android:layout_above="@+id/daily_training_startbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:visibility="invisible"
+        android:id="@+id/daily_training_next"
+        android:layout_above="@id/daily_training_startbtn"
+        android:src="@drawable/next_icon"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"/>
 </RelativeLayout>
